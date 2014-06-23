@@ -13,6 +13,11 @@
 # limitations under the License.
 #
 
+execute "pip_install" do
+  command "pip install --upgrade six"
+  only_if { node[:platform] == "ubuntu" }
+end
+
 unless node[:neutron][:use_gitrepo]
   pkgs = node[:neutron][:platform][:pkgs]
   pkgs.each { |p| package p }
